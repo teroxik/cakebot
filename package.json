@@ -27,7 +27,7 @@
   "dependencies": {
     "hubot":         ">= 2.6.0 < 3.0.0",
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
-    "hubot-flowdock": "0.0.6"
+    "hubot-flowdock": ">= 0.6.0"
 },
 
   "engines": {
