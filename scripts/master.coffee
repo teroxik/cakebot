@@ -6,5 +6,9 @@ module.exports = (robot) ->
        msg.reply "My beloved master!"
      else if sender == "cornel"
        msg.reply "Bloody Romanian, not gypsy at least!"
+     else if sender == "petr"
+       msg.reply "Bloody Czech, evil!"
+     else if sender == "damien"
+       msg.reply "Très sympathique et compatriote raisonnable."           
      else
        msg.reply "Poor human being!"
