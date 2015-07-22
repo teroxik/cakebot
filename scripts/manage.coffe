@@ -1,8 +1,0 @@
-module.exports = (robot) ->
-   robot.respond /manage me/i, (msg) ->
-     console.log("Sheeeeit")
-     messages = ['What story are you working on?','How are you getting on?','What is the estimate of your current task?','Can you please focus on the reviews.'] 
-     console.log(messages)
-     rand = Math.floor(Math.random()*messages.length)
-     console.log(rand)
-     msg.reply messages[rand]
