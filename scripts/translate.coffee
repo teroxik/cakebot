@@ -119,6 +119,7 @@ module.exports = (robot) ->
               else
                 msg.send "The #{language} #{term} translates as #{parsed} in #{languages[target]}"
           else
+            msg.send body
             throw new SyntaxError 'Invalid JS code'
 
         catch err
