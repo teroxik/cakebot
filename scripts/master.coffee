@@ -4,6 +4,8 @@ objects =
         petr:	"Evil czech person. I don't like him."
 	damien: "Très sympathique et compatriote raisonnable."
 	mario: "Donut eater."
+	laura: "Pretty descendant of brave vampire slayer family.        
+
 names = ["michal","cornel","petr","damien","mario"]
 
 /*
@@ -25,9 +27,8 @@ names = ["michal","cornel","petr","damien","mario"]
 
 module.exports = (robot) ->
    robot.respond /who am I/i, (msg) ->
-
      sender = msg.message.user.name.toLowerCase()
-     if names.indexof(sender) > -1
+     if names.indexOf(sender) > -1
        msg.reply objects[sender]
      else
        msg.reply "Poor human being!"
