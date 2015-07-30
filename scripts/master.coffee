@@ -4,7 +4,7 @@ objects =
         petr:	"Evil czech person. I don't like him."
 	damien: "Très sympathique et compatriote raisonnable."
 	mario: "Donut eater."
-	laura: "Pretty descendant of brave vampire slayer family.        
+	laura: "Pretty descendant of brave vampire slayer family."        
 
 names = ["michal","cornel","petr","damien","mario"]
 
