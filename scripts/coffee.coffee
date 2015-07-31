@@ -18,7 +18,7 @@ module.exports = (robot) ->
     
     if theHour() <= 16 && theMinute <= 45 #< 4:45pm
       msg.send "There is still time for coffee!"
-    if theHour() >= 16 && theMinute >= 46  
+    if theHour() == 16 && theMinute >= 46  
       msg.send "@Cornel, @Ani, @Andrew, last call for coffees! :bell:"
     if theHour() >= 17
       msg.send "Cake Coffee is CLOSED."
