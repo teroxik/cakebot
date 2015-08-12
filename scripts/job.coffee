@@ -12,4 +12,4 @@ module.exports = (robot) ->
     randomNumber2 = parseInt(Math.random() * wordlist2.length);
     randomNumber3 = parseInt(Math.random() * wordlist3.length);
     resp = "Your next position will be " + wordlist1[randomNumber1] + " " + wordlist2[randomNumber2] + " " + wordlist3[randomNumber3];					
-    msg.reply messages[resp]
+    msg.reply resp
