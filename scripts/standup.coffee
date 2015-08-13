@@ -19,13 +19,17 @@ module.exports = (robot) ->
   getAlerts = -> robot.brain.get('alerts') || []
   clearAlerts = -> robot.brain.set('alerts', [])
 
-  registerJob '0 0,5,10,15,20,25,30,35,40,45,50,55 * * * *', ->
+  pattern = new RegExp('alert:add ' +
+    "([\w .\-_]+) " +
+    "([01]?[0-9]|2[0-3])" +
+    "([0-5][0-9])", 'i')
+
+  registerJob '0 0,30 * * * *', ->
     alerts = getAlerts()
-    robot.send { room: room }, "Standup alerts are coming!!"
+    robot.send { room: room }, "Standup alert!!"
 
-
-  robot.respond /alert:add (.+)/, (msg) ->
-    alert = msg.match[1]
+  robot.respond pattern, (msg) ->
+    alert = { room: msg.match[1], hour: msg.match[2], minutes: msg.match[3] }
     alerts = getAlerts()
     alerts.push alert
     robot.brain.set 'alerts', alerts
