@@ -20,7 +20,7 @@ module.exports = (robot) ->
   clearAlerts = -> robot.brain.set('alerts', [])
 
   pattern = new RegExp('alert:add ' +
-    "([\w .\-_]+) " +
+    "([\w. \W. \-_]+) " +
     "([01]?[0-9]|2[0-3])" +
     "([0-5][0-9])", 'i')
 
@@ -35,6 +35,10 @@ module.exports = (robot) ->
     robot.brain.set 'alerts', alerts
 
     count = alerts.length
+    
+    registerJob "0 #{alert.hour} #{alert.minutes} * * * *", ->
+      robot.send { room: alert.room }, "Standup alert!!"
+
     text = "New alert has been added!\n"
     text += "The number of alerts is #{count}."
     msg.send text
