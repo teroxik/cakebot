@@ -3,7 +3,7 @@
 #
 # Commands:
 #   hubot alert:list - List all the alerts
-#   hubot alert:add - Add an alert to the alerts collection
+#   hubot alert:add - Add an alert to the alerts collection in format roomName hhMM any text of the message
 #   hubot alert:clear - Clears the alerts collection
 
 cron = require('cron').CronJob
@@ -22,20 +22,17 @@ module.exports = (robot) ->
   pattern = new RegExp('alert:add ' +
     "([\w. \W. \-_]+) " +
     "([01]?[0-9]|2[0-3])" +
-    "([0-5][0-9])", 'i')
-
-  registerJob '0 0,30 * * * *', ->
-    alerts = getAlerts()
-    robot.send { room: room }, "Standup alert!!"
+    "([0-5][0-9])" +
+    "(.*)", 'i')
 
   robot.respond pattern, (msg) ->
-    alert = { room: msg.match[1], hour: msg.match[2], minutes: msg.match[3] }
+    alert = { room: msg.match[1], hour: msg.match[2], minutes: msg.match[3], text: msg.match(4) }
     alerts = getAlerts()
     alerts.push alert
     robot.brain.set 'alerts', alerts
 
     count = alerts.length
-    
+
     registerJob "0 #{alert.hour} #{alert.minutes} * * * *", ->
       robot.send { room: alert.room }, "Standup alert!!"
 
@@ -43,6 +40,9 @@ module.exports = (robot) ->
     text += "The number of alerts is #{count}."
     msg.send text
 
+
+  alertToText = (alert) ->
+    "Room: #{alert.room}, HH: #{alert.hour}, mm: #{alert.mm}, text: #{alert.text}"
 
   robot.respond /alert:list/, (msg) ->
     alerts = getAlerts()
@@ -53,7 +53,10 @@ module.exports = (robot) ->
       else
         "The number of alerts is #{count} ."
 
-    msg.send "#{text}\n" + alerts.join "\n"
+    alertsText = alerts.reduce((previousValue, currentValue, index, array) ->
+          previousValue + alertToText(currentValue)
+    )
+    msg.send "#{text}\n" + alertsText
 
 
   robot.respond /alert:clear/, (msg) ->
