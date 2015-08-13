@@ -13,11 +13,10 @@ room = 'Main'
 registerJob = (expr, cb) ->
   new cron expr, cb, null, true
 
-
-
 module.exports = (robot) ->
   getAlerts = -> robot.brain.get('alerts') || []
   clearAlerts = -> robot.brain.set('alerts', [])
+
 
   pattern = new RegExp('alert:add ' +
     "([\w. \W. \-_]+) " +
