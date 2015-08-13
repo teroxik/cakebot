@@ -26,7 +26,7 @@ module.exports = (robot) ->
     "(.*)", 'i')
 
   robot.respond pattern, (msg) ->
-    alert = { room: msg.match[1], hour: msg.match[2], minutes: msg.match[3], text: msg.match(4) }
+    alert = { room: msg.match[1], hour: msg.match[2], minutes: msg.match[3], text: msg.match[4] }
     alerts = getAlerts()
     alerts.push alert
     robot.brain.set 'alerts', alerts
@@ -42,7 +42,7 @@ module.exports = (robot) ->
 
 
   alertToText = (alert) ->
-    "Room: #{alert.room}, HH: #{alert.hour}, mm: #{alert.mm}, text: #{alert.text}"
+    "Room: #{alert.room}, HH: #{alert.hour}, mm: #{alert.minutes}, text: #{alert.text}"
 
   robot.respond /alert:list/, (msg) ->
     alerts = getAlerts()
