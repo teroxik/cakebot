@@ -24,3 +24,7 @@ build/Release
 
 # Users Environment Variables
 .lock-wscript
+
+#IntelliJ
+.idea
+*.iml

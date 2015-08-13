@@ -1,3 +1,9 @@
+# Description:
+#   Funky charecterization of each employee
+#
+# Commands:
+#   hubot who am I <phrase> - Lookup for the funky phrase by name and then prints that bad boy out.
+
 obj =
     michal: "My beloved master"
     cornel: "Bloody Romanian, not gypsy at least!"
