@@ -32,7 +32,7 @@ module.exports = (robot) ->
 
     count = alerts.length
 
-    registerJob "0 #{alert.minutes} #{alert.hour} * * * *", ->
+    registerJob "0 #{alert.minutes} #{alert.hour} * * *", ->
       robot.send { room: alert.room }, alert.text
 
     text = "New alert has been added!\n"
