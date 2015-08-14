@@ -34,4 +34,4 @@ module.exports = (robot) ->
     if 17 - theHour() <= 0
       msg.send "There's no coffee left! Boooooo!"
     else 
-      msg.send "There's enough coffee to last us another " + (16 - theHour()) + " hour and " + theMinute + " minutes today."
+      msg.send "There's enough coffee to last us another " + (16 - theHour()) + " hour and " + (60 - theMinute) + " minutes today."
