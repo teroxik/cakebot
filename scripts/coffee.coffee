@@ -43,7 +43,7 @@ module.exports = (robot) ->
 
     theHour = () -> 
       if now.getDay() == 5
-        now.getHours() + 1
+        now.getHours() + 1 # Fridays we close an hour earlier
       else 
         now.getHours()
     theMinute = now.getMinutes()
