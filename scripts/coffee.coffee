@@ -2,9 +2,11 @@
 #   Last calls for Cake coffee!
 #
 # Notes:
-#   
+# - coffee me: replys whether Cake Coffee is open, closed or last calls (15 minutes before closing)
+#  - coffee left: replys with time remaining till Cake Coffee closes that day  
 
 moment = require 'moment-timezone'
+https = require 'https'
 
 module.exports = (robot) ->
   robot.respond /coffee me/i, (msg) ->
@@ -24,7 +26,21 @@ module.exports = (robot) ->
       msg.send "Cake Coffee is CLOSED."
 
   robot.respond /coffee left/i, (msg) ->
-    now = moment(new Date()).tz('Europe/London').toDate() #current timezone
+    # Get current timestamp
+    timestamp = Math.floor(new Date() / 1000)
+    manchesterTimestamp = timestamp
+
+    # Ask Google for Manchester offset and set the variable
+    https.get 'https://maps.googleapis.com/maps/api/timezone/json?location=53.435849,-2.165621&timestamp=' + timestamp, (res) ->
+      data = ''
+      res.on 'data', (chunk) ->
+        data += chunk.toString()
+      res.on 'end', () ->
+        manchesterTimestamp = timestamp + JSON.parse(data).dstOffset
+
+    # Create date/time object from timestamp
+    now = new Date(manchesterTimestamp * 1000)
+
     theHour = () -> 
       if now.getDay() == 5
         now.getHours() + 1
