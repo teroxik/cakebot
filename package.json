@@ -1,17 +1,13 @@
 {
-  "name": "hosted-hubot",
-  "version": "2.7.1",
-  "private": true,
-
-  "author": "GitHub Inc.",
-
+  "name": "hubot",
+  "version": "2.18.0",
+  "author": "hubot",
   "keywords": [
     "github",
     "hubot",
     "campfire",
     "bot"
   ],
-
   "description": "A simple helpful robot for your Company",
 
   "licenses": [{
@@ -23,8 +19,6 @@
     "type": "git",
     "url": "https://github.com/github/hubot.git"
   },
-
-
   "dependencies": {
     "hubot":         "2.19.0",
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
