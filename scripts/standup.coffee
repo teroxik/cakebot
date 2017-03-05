@@ -39,26 +39,23 @@ module.exports = (robot) ->
     text += "The number of alerts is #{count}."
     msg.send text
 
-
   alertToText = (alert) ->
     "Room: #{alert.room}, HH: #{alert.hour}, mm: #{alert.minutes}, text: #{alert.text}"
 
-  robot.respond /alert:list/, (msg) ->
+  robot.respond /alert:list/i, (msg) ->
     alerts = getAlerts()
     count = alerts.length
     text =
       if count is 0
         'You have no alerts'
       else
-        "The number of alerts is #{count} ."
-
-    alertsText = alerts.reduce((previousValue, currentValue, index, array) ->
+        "The number of alerts is #{count} ." + 
+        alerts.reduce((previousValue, currentValue, index, array) ->
           previousValue + alertToText(currentValue)
-    )
-    msg.send "#{text}\n" + alertsText
+        )
+    msg.send "#{text}\n"
 
-
-  robot.respond /alert:clear/, (msg) ->
+  robot.respond /alert:clear/i, (msg) ->
     clearAlerts()
     msg.send 'All alerts have been cleared.'
 
